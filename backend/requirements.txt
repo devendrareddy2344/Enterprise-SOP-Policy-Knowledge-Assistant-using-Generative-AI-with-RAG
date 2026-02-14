@@ -1,0 +1,16 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+langchain-community
+langchain-core
+langchain-text-splitters
+langchain-huggingface
+faiss-cpu
+pydantic
+typing-extensions
+pypdf
+pandas
+sentence-transformers
+google-genai
+python-multipart
