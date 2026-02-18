@@ -2,28 +2,28 @@ import os
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
 from app.llm_handler import generate_answer
 
 # -----------------------------
 # Global Variables
 # -----------------------------
 vector_store = None
-SIMILARITY_THRESHOLD = 0.3
 INDEX_PATH = "faiss_index"
 
 
 # -----------------------------
-# Embeddings Loader
+# Embeddings (Cloud-Based)
 # -----------------------------
 def get_embeddings():
-    return HuggingFaceEmbeddings(
+    return HuggingFaceInferenceAPIEmbeddings(
+        api_key=os.getenv("HF_TOKEN"),
         model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
 
 
 # -----------------------------
-# Load Existing FAISS (if exists)
+# Load Existing FAISS
 # -----------------------------
 def load_vector_store():
     global vector_store
@@ -39,7 +39,7 @@ def load_vector_store():
 
 
 # -----------------------------
-# Save FAISS to Disk
+# Save FAISS
 # -----------------------------
 def save_vector_store():
     global vector_store
@@ -72,7 +72,6 @@ def add_documents(filename, text):
     split_docs = splitter.split_documents([document])
     embeddings = get_embeddings()
 
-    # Load existing index if not loaded
     if vector_store is None:
         if os.path.exists(INDEX_PATH):
             vector_store = FAISS.load_local(
