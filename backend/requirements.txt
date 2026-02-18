@@ -11,6 +11,5 @@ pydantic
 typing-extensions
 pypdf
 pandas
-sentence-transformers
 google-genai
 python-multipart
