@@ -5,7 +5,7 @@ import requests
 # Backend Configuration
 # =========================================
 
-BASE_URL = "http://127.0.0.1:8000"
+BASE_URL = "https://enterprise-sop-policy-knowledge.onrender.com/"
 ASK_URL = f"{BASE_URL}/ask"
 UPLOAD_URL = f"{BASE_URL}/upload"
 
