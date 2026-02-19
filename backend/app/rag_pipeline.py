@@ -2,7 +2,7 @@ import os
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 from langchain_community.vectorstores import FAISS
-from langchain_community.embeddings import HuggingFaceInferenceAPIEmbeddings
+from langchain_huggingface import HuggingFaceEndpointEmbeddings
 from app.llm_handler import generate_answer
 
 # -----------------------------
@@ -13,12 +13,17 @@ INDEX_PATH = "faiss_index"
 
 
 # -----------------------------
-# Embeddings (Cloud-Based)
+# Embeddings (NEW & STABLE)
 # -----------------------------
 def get_embeddings():
-    return HuggingFaceInferenceAPIEmbeddings(
-        api_key=os.getenv("HF_TOKEN"),
-        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    token = os.getenv("HF_TOKEN")
+
+    if not token:
+        raise ValueError("HF_TOKEN is not set in environment variables.")
+
+    return HuggingFaceEndpointEmbeddings(
+        huggingfacehub_api_token=token,
+        model="sentence-transformers/all-MiniLM-L6-v2"
     )
 
 

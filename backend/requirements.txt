@@ -6,6 +6,7 @@ langchain-community
 langchain-core
 langchain-text-splitters
 langchain-huggingface
+huggingface-hub
 faiss-cpu
 pydantic
 typing-extensions
