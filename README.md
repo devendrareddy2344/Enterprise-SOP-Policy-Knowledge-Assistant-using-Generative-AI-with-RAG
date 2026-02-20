@@ -4,6 +4,9 @@ This is a production-ready, RAG-based Enterprise Knowledge Assistant. It uses a 
 
 ## Project Architecture
 
+![Workflow Diagram](workflow.png)
+
+
 The system follows a microservice-like architecture:
 
 1.  **Frontend (Streamlit)**:
@@ -28,6 +31,7 @@ enterprise-rag/
 ├── backend/                  # Backend Logic (FastAPI)
 │   ├── app/
 │   │   ├── main.py           # API Entry Point
+│   │   ├── auth.py           # Role-Based Access Control Logic
 │   │   ├── rag_pipeline.py   # RAG Logic Orchestrator
 │   │   ├── ingestion.py      # Document Loading & Vectorization
 │   │   ├── retrieval.py      # Semantic Search Engine
